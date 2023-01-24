@@ -1,6 +1,9 @@
 СЕВ ОВВ 2.0 з підтримкою НПА
 ============================
 
+[![Actions Status](https://github.com/erpuno/sevovv/workflows/mix/badge.svg)](https://github.com/erpuno/sevovv/actions)
+[![Hex pm](https://img.shields.io/hexpm/v/sevovv.svg?style=flat)](https://hex.pm/packages/sevovv)
+
 Пакет модулів для роботи з СЕВ ОВВ та НПА розширенням.
 Документація складається з чотирьох файлів Markdown:
 
