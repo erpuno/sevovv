@@ -12,7 +12,7 @@ defmodule SEVOVV.Mixfile do
   end
 
   def application do
-    [mod: {SEVOVV, []}, applications: [:logger, :schema, :form, :nitro, :n2o, :kvs, :sax, :soa, :jsone, :bpe]]
+    [mod: {SEVOVV, []}, applications: [:logger, :schema, :form, :nitro, :n2o, :kvs, :sax, :soa, :jsone, :ecsv, :bpe]]
   end
 
   def package do
