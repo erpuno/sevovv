@@ -1,0 +1,9 @@
+{application, nitro, [
+    {description,  "NITRO Nitrogen Web Framework"},
+    {vsn,          "7.10.0"},
+    {applications, [kernel, stdlib]},
+    {modules, []},
+    {registered,   []},
+    {mod, { nitro, []}},
+    {env, []}
+]}.

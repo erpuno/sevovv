@@ -1,0 +1,13 @@
+# Target labels
+ rocksdb
+# Source files and their labels
+/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/CMakeFiles/rocksdb
+/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/CMakeFiles/rocksdb.rule
+/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/CMakeFiles/rocksdb-complete.rule
+/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-stamp/rocksdb-build.rule
+/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-stamp/rocksdb-configure.rule
+/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-stamp/rocksdb-download.rule
+/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-stamp/rocksdb-install.rule
+/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-stamp/rocksdb-mkdir.rule
+/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-stamp/rocksdb-patch.rule
+/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-stamp/rocksdb-update.rule

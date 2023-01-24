@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+    xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+    xmlns:s0="http://tempuri.org"
+    xmlns:s="http://www.w3.org/2001/XMLSchema"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <types>
+      <s:schema elementFormDefault="qualified">
+
+        <!-- Скаляри -->
+
+	<s:element name="anyType" nillable="true" type="s:anyType"/>
+	<s:element name="anyURI" nillable="true" type="s:anyURI"/>
+	<s:element name="base64Binary" nillable="true" type="s:base64Binary"/>
+	<s:element name="boolean" nillable="true" type="s:boolean"/>
+	<s:element name="byte" nillable="true" type="s:byte"/>
+	<s:element name="dateTime" nillable="true" type="s:dateTime"/>
+	<s:element name="decimal" nillable="true" type="s:decimal"/>
+	<s:element name="double" nillable="true" type="s:double"/>
+	<s:element name="float" nillable="true" type="s:float"/>
+	<s:element name="int" nillable="true" type="s:int"/>
+	<s:element name="long" nillable="true" type="s:long"/>
+	<s:element name="QName" nillable="true" type="s:QName"/>
+	<s:element name="short" nillable="true" type="s:short"/>
+	<s:element name="string" nillable="true" type="s:string"/>
+	<s:element name="unsignedByte" nillable="true" type="s:unsignedByte"/>
+	<s:element name="unsignedInt" nillable="true" type="s:unsignedInt"/>
+	<s:element name="unsignedLong" nillable="true" type="s:unsignedLong"/>
+	<s:element name="unsignedShort" nillable="true" type="s:unsignedShort"/>
+	<s:element name="char" nillable="true" type="s0:char"/>
+	<s:simpleType name="char">
+		<s:restriction base="s:int"/>
+	</s:simpleType>
+	<s:element name="duration" nillable="true" type="s0:duration"/>
+	<s:simpleType name="duration">
+		<s:restriction base="s:duration">
+			<s:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+			<s:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+			<s:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:element name="guid" nillable="true" type="s0:guid"/>
+	<s:simpleType name="guid">
+		<s:restriction base="s:string">
+			<s:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:attribute name="FactoryType" type="s:QName"/>
+	<s:attribute name="Id" type="s:ID"/>
+	<s:attribute name="Ref" type="s:IDREF"/>
+
+        <!-- Базові складні типи -->
+
+	<s:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" schemaLocation="XSDTypes.xsd"/>
+	<s:complexType name="Identity">
+		<s:sequence>
+			<s:element name="Password" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="SystemId" type="s:string" nillable="true" minOccurs="0"/>
+		</s:sequence>
+	</s:complexType>
+	<s:element name="Identity" type="s0:Identity" nillable="true"/>
+	<s:complexType name="MessageInfo">
+		<s:sequence>
+			<s:element name="CreationDate" type="s:dateTime" minOccurs="0"/>
+			<s:element name="Creator" type="s0:MessageCreator" minOccurs="0"/>
+			<s:element name="Format" type="s0:DataTransferFormat" minOccurs="0"/>
+			<s:element name="FromOrgId" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="FromSysId" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="MessageId" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="SessionId" type="s:long" minOccurs="0"/>
+			<s:element name="Size" type="s:long" minOccurs="0"/>
+			<s:element name="ToOrgId" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="ToSysId" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="Type" type="s0:MessageType" minOccurs="0"/>
+		</s:sequence>
+	</s:complexType>
+	<s:element name="MessageInfo" type="s0:MessageInfo" nillable="true"/>
+	<s:simpleType name="MessageCreator">
+		<s:restriction base="s:string">
+			<s:enumeration value="Sed"/>
+			<s:enumeration value="Sev"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:element name="MessageCreator" type="s0:MessageCreator" nillable="true"/>
+	<s:simpleType name="DataTransferFormat">
+		<s:restriction base="s:string">
+			<s:enumeration value="Plain"/>
+			<s:enumeration value="SevenZipArchive"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:element name="DataTransferFormat" type="s0:DataTransferFormat" nillable="true"/>
+	<s:simpleType name="MessageType">
+		<s:annotation>
+			<s:appinfo>
+				<ActualType Name="unsignedByte" Namespace="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+			</s:appinfo>
+		</s:annotation>
+		<s:restriction base="s:string">
+			<s:enumeration value="Notification"/>
+			<s:enumeration value="Document"/>
+			<s:enumeration value="DocumentAddition"/>
+			<s:enumeration value="ReplayDocument"/>
+			<s:enumeration value="ReplayDocumentAddition"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:element name="MessageType" type="s0:MessageType" nillable="true"/>
+	<s:complexType name="SessionInfo">
+		<s:sequence>
+			<s:element name="Error" type="s0:CommunicationError" nillable="true" minOccurs="0"/>
+			<s:element name="MaxPartSize" type="s:int" minOccurs="0"/>
+			<s:element name="MessageId" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="MessageSize" type="s:long" minOccurs="0"/>
+			<s:element name="SessionId" type="s:long" minOccurs="0"/>
+			<s:element name="Status" type="s0:SessionStatus" minOccurs="0"/>
+			<s:element name="TransferredBytesCount" type="s:long" minOccurs="0"/>
+			<s:element name="Type" type="s0:SessionType" minOccurs="0"/>
+		</s:sequence>
+	</s:complexType>
+	<s:element name="SessionInfo" type="s0:SessionInfo" nillable="true"/>
+	<s:complexType name="CommunicationError">
+		<s:sequence>
+			<s:element name="Code" type="s:int" minOccurs="0"/>
+			<s:element name="Text" type="s:string" nillable="true" minOccurs="0"/>
+		</s:sequence>
+	</s:complexType>
+	<s:element name="CommunicationError" type="s0:CommunicationError" nillable="true"/>
+	<s:simpleType name="SessionStatus">
+		<s:annotation>
+			<s:appinfo>
+				<ActualType Name="unsignedByte" Namespace="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+			</s:appinfo>
+		</s:annotation>
+		<s:restriction base="s:string">
+			<s:enumeration value="Opened">
+				<s:annotation>
+					<s:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+					</s:appinfo>
+				</s:annotation>
+			</s:enumeration>
+			<s:enumeration value="InProgress">
+				<s:annotation>
+					<s:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+					</s:appinfo>
+				</s:annotation>
+			</s:enumeration>
+			<s:enumeration value="Processed">
+				<s:annotation>
+					<s:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+					</s:appinfo>
+				</s:annotation>
+			</s:enumeration>
+			<s:enumeration value="Failed">
+				<s:annotation>
+					<s:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+					</s:appinfo>
+				</s:annotation>
+			</s:enumeration>
+			<s:enumeration value="Delivered">
+				<s:annotation>
+					<s:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+					</s:appinfo>
+				</s:annotation>
+			</s:enumeration>
+		</s:restriction>
+	</s:simpleType>
+	<s:element name="SessionStatus" type="s0:SessionStatus" nillable="true"/>
+	<s:simpleType name="SessionType">
+		<s:annotation>
+			<s:appinfo>
+				<ActualType Name="unsignedByte" Namespace="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+			</s:appinfo>
+		</s:annotation>
+		<s:restriction base="s:string">
+			<s:enumeration value="Upload"/>
+			<s:enumeration value="Download"/>
+		</s:restriction>
+	</s:simpleType>
+	<s:element name="SessionType" type="s0:SessionType" nillable="true"/>
+	<s:complexType name="DownloadChunkResponse">
+		<s:sequence>
+			<s:element name="MessageChunk" type="s:base64Binary" nillable="true" minOccurs="0"/>
+			<s:element name="Session" type="s0:SessionInfo" nillable="true" minOccurs="0"/>
+		</s:sequence>
+	</s:complexType>
+	<s:element name="DownloadChunkResponse" type="s0:DownloadChunkResponse" nillable="true"/>
+	<s:complexType name="MessageValidationInfo">
+		<s:sequence>
+			<s:element name="Hash" type="s:string" nillable="true" minOccurs="0"/>
+			<s:element name="Session" type="s0:SessionInfo" nillable="true" minOccurs="0"/>
+			<s:element name="Signature" type="s:base64Binary" nillable="true" minOccurs="0"/>
+		</s:sequence>
+	</s:complexType>
+	<s:element name="MessageValidationInfo" type="s0:MessageValidationInfo" nillable="true"/>
+	<s:complexType name="ArrayOfSessionInfo">
+		<s:sequence>
+			<s:element name="SessionInfo" type="s0:SessionInfo" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</s:sequence>
+	</s:complexType>
+	<s:element name="ArrayOfSessionInfo" type="s0:ArrayOfSessionInfo" nillable="true"/>
+	<s:complexType name="ArrayOfMessageInfo">
+		<s:sequence>
+			<s:element name="MessageInfo" type="s0:MessageInfo" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</s:sequence>
+	</s:complexType>
+	<s:element name="ArrayOfMessageInfo" type="s0:ArrayOfMessageInfo" nillable="true"/>
+
+       <!-- Методи НПА сервісу -->
+
+	<s:complexType name="LegalActData" type="s0:LegalActData">
+		<s:annotation>
+			<s:documentation>Тип "Інформація по конкретному проекту НПА"</s:documentation>
+		</s:annotation>
+		<s:sequence>
+			<s:element name="initOrg" type="s:string">
+				<s:annotation>
+					<s:documentation>Організація розробник НПА</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="actName" type="s:string">
+				<s:annotation>
+					<s:documentation>Назва проекту НПА</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="actGUID" type="s:string">
+				<s:annotation>
+					<s:documentation>Ідентифікаційний номер проекту НПА</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="initDate" type="s:dateTime">
+				<s:annotation>
+					<s:documentation>Дата ініціації проекту НПА</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="currentStage" type="s:string">
+				<s:annotation>
+					<s:documentation>Поточний етап погодження проекту НПА</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="outDocRegNum" type="s:string">
+				<s:annotation>
+					<s:documentation>Вихідний реєстраційний номер останньої РКК на погодження поточного етапу погодження НПА</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="lastTS" type="s:dateTime">
+				<s:annotation>
+					<s:documentation>Дата та час внесення останньої зміни в проекті НПА</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="stage1PassageInfo" type="s0:ArrayOfPassageInfo">
+				<s:annotation>
+					<s:documentation>Інформація щодо проходження 1-го етапу - погодження відповідних ОВВ</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="stage2PassageInfo" type="s0:PassageInfo" minOccurs="0">
+				<s:annotation>
+					<s:documentation>Інформація щодо проходження 2-го етапу - державної експертизи</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="stage3PassageInfo" type="s0:PassageInfo" minOccurs="0">
+				<s:annotation>
+					<s:documentation>Інформація щодо проходження 3-го етапу - розгляду у СКМУ</s:documentation>
+				</s:annotation>
+			</s:element>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="AllLegalActsData" type="s0:AllLegalActsData">
+		<s:annotation>
+			<s:documentation>Тип "Перелік активних проектів НПА"</s:documentation>
+		</s:annotation>
+		<s:sequence>
+			<s:element name="initOrg" type="s:string">
+				<s:annotation>
+					<s:documentation>Організація розробник НПА</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="actName" type="s:string">
+				<s:annotation>
+					<s:documentation>Назва проекту НПА</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="actGUID" type="s:string">
+				<s:annotation>
+					<s:documentation>Ідентифікаційний номер проекту НПА</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="initDate" type="s:dateTime">
+				<s:annotation>
+					<s:documentation>Дата ініціації проекту НПА</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="currentStage" type="s:string">
+				<s:annotation>
+					<s:documentation>Поточний етап погодження проекту НПА</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="outDocRegNum" type="s:string">
+				<s:annotation>
+					<s:documentation>Вихідний реєстраційний номер останньої РКК на погодження поточного етапу погодження НПА</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="lastTS" type="s:dateTime">
+				<s:annotation>
+					<s:documentation>Дата та час внесення останньої зміни в проекті НПА</s:documentation>
+				</s:annotation>
+			</s:element>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="PassageInfo" type="s0:PassageInfo">
+		<s:annotation>
+			<s:documentation>Інформація щодо проходження проекту НПА у відповідному ОВВ</s:documentation>
+		</s:annotation>
+		<s:sequence>
+			<s:element name="org" type="s:string">
+				<s:annotation>
+					<s:documentation>ОВВ, до якого НПА направлено на погодження</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="incomeDate" type="s:dateTime">
+				<s:annotation>
+					<s:documentation>Дата надсилання на погодження</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="outDocRegNum" type="s:string">
+				<s:annotation>
+					<s:documentation>Вихідний реєстраційний номер останньої РКК на погодження</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="inDocRegNum" type="s:string" minOccurs="0">
+				<s:annotation>
+					<s:documentation>Вхідний реєстраційний номер РКК на погодження в ОВВ</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="answerResult" type="s:string" minOccurs="0">
+				<s:annotation>
+					<s:documentation>Результат виконання(погодження)</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="answerResultDate" type="s:dateTime" minOccurs="0">
+				<s:annotation>
+					<s:documentation>Дата виконання(погодження)</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="answerDocRegNum" type="s:string" minOccurs="0">
+				<s:annotation>
+					<s:documentation>Вихідний реєстраційний номер звіту на погодження</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="answerDocSigner" type="s:string" minOccurs="0">
+				<s:annotation>
+					<s:documentation>Підписант звіту на погодження</s:documentation>
+				</s:annotation>
+			</s:element>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="ArrayOfPassageInfo" type="s0:ArrayOfPassageInfo">
+		<s:annotation>
+			<s:documentation>Масив - Інформація щодо проходження проекту НПА у відповідному ОВВ</s:documentation>
+		</s:annotation>
+		<s:sequence>
+			<s:element name="passageInfo" type="s0:PassageInfo" minOccurs="2" maxOccurs="unbounded"/>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="ArrayOfLegalActsData" type="s0:ArrayOfLegalActsData">
+		<s:annotation>
+			<s:documentation>Масив - Інформація щодо проходження проекту НПА у відповідному ОВВ</s:documentation>
+		</s:annotation>
+		<s:sequence>
+			<s:element name="legalActData" type="s0:AllLegalActsData" minOccurs="0" maxOccurs="unbounded"/>
+		</s:sequence>
+	</s:complexType>
+	<s:element name="GetAllLegalActs" type="s0:GetAllLegalActs">
+		<s:annotation>
+			<s:documentation>Перелік активних проектів НПА - запит</s:documentation>
+		</s:annotation>
+		<s:complexType>
+			<s:sequence>
+				<s:element name="identity" type="s0:Identity" nillable="true"/>
+			</s:sequence>
+		</s:complexType>
+	</s:element>
+	<s:element name="GetLegalAct" type="s0:GetLegalAct">
+		<s:annotation>
+			<s:documentation>Інформація по конкретному проекту НПА - запит</s:documentation>
+		</s:annotation>
+		<s:complexType>
+			<s:sequence>
+				<s:element name="identity" type="s0:Identity" nillable="true"/>
+				<s:element name="actGUID" type="s:string" nillable="true"/>
+			</s:sequence>
+		</s:complexType>
+	</s:element>
+	<s:element name="GetNewLegalActURN" type="s0:GetNewLegalActURN">
+		<s:annotation>
+			<s:documentation>Формування нового УРН для проекту НПА - запит</s:documentation>
+		</s:annotation>
+		<s:complexType>
+			<s:sequence>
+				<s:element name="identity" type="s0:Identity" nillable="true"/>
+				<s:element name="actType" type="s0:anyType">
+					<s:annotation>
+						<s:documentation>тип проекту акта ("З" - законопроект, "У" - Указ, "П" - постанова, "Р" - розпорядження)</s:documentation>
+					</s:annotation>
+				</s:element>
+			</s:sequence>
+		</s:complexType>
+	</s:element>
+	<s:element name="CancelURNRegistration" type="s0:CancelURNRegistration">
+		<s:annotation>
+			<s:documentation>Скасування реєстраціі УРН для проекту НПА - запит</s:documentation>
+		</s:annotation>
+		<s:complexType>
+			<s:sequence>
+				<s:element name="identity" type="s0:Identity" nillable="true"/>
+				<s:element name="urn">
+					<s:annotation>
+						<s:documentation>УРН, який необхідно скасувати </s:documentation>
+					</s:annotation>
+				</s:element>
+			</s:sequence>
+		</s:complexType>
+	</s:element>
+	<s:complexType name="GetLegalActResult" type="s0:GetLegalActResult">
+		<s:annotation>
+			<s:documentation>Тип "Інформація по конкретному проекту НПА - відповідь"</s:documentation>
+		</s:annotation>
+		<s:sequence>
+			<s:element name="actGUID" type="s:string" nillable="true">
+				<s:annotation>
+					<s:documentation>GUID НПА</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="error" type="s0:CommunicationError" minOccurs="0">
+				<s:annotation>
+					<s:documentation>Помилка</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="passFormFile" type="s:base64Binary" minOccurs="0">
+				<s:annotation>
+					<s:documentation>Файл аркушу проходження НПА</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="legalActData" type="s0:LegalActData" minOccurs="0">
+				<s:annotation>
+					<s:documentation>Дані НПА</s:documentation>
+				</s:annotation>
+			</s:element>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="GetNewLegalActURNResult" type="s0:GetNewLegalActURNResult">
+		<s:annotation>
+			<s:documentation>Тип "Формування нового УРН для проекту НПА - відповідь"</s:documentation>
+		</s:annotation>
+		<s:sequence>
+			<s:element name="error" type="s0:CommunicationError" minOccurs="0">
+				<s:annotation>
+					<s:documentation>Помилка</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="urn" type="s:string" minOccurs="0">
+				<s:annotation>
+					<s:documentation>Новий сформований УРН для проекту НПА</s:documentation>
+				</s:annotation>
+			</s:element>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="CancelURNRegistrationResult" type="s0:CancelURNRegistrationResult">
+		<s:annotation>
+			<s:documentation>Тип "Скасування реєстраціі УРН для проекту НПА - відповідь"</s:documentation>
+		</s:annotation>
+		<s:sequence>
+			<s:element name="error" type="s0:CommunicationError" minOccurs="0">
+				<s:annotation>
+					<s:documentation>Помилка</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="isURNCancelled" type="s:boolean" minOccurs="0">
+				<s:annotation>
+					<s:documentation>Позначка того, що скасування виконано успішно</s:documentation>
+				</s:annotation>
+			</s:element>
+		</s:sequence>
+	</s:complexType>
+	<s:complexType name="GetAllLegalActsResult" type="s0:GetAllLegalActsResult">
+		<s:annotation>
+			<s:documentation>Тип "Перелік активних проектів НПА - відповідь"</s:documentation>
+		</s:annotation>
+		<s:sequence>
+			<s:element name="error" type="s0:CommunicationError" minOccurs="0">
+				<s:annotation>
+					<s:documentation>Помилка</s:documentation>
+				</s:annotation>
+			</s:element>
+			<s:element name="allLegalActsData" type="s0:ArrayOfLegalActsData" minOccurs="0">
+				<s:annotation>
+					<s:documentation>Дані переліку НПА</s:documentation>
+				</s:annotation>
+			</s:element>
+		</s:sequence>
+	</s:complexType>
+	<s:element name="GetNewLegalActURNResponse" type="s0:GetNewLegalActURNResult">
+		<s:annotation>
+			<s:documentation>Формування нового УРН для проекту НПА - відповідь</s:documentation>
+		</s:annotation>
+	</s:element>
+	<s:element name="CancelURNRegistrationResponse" type="s0:CancelURNRegistrationResult">
+		<s:annotation>
+			<s:documentation>Скасування реєстраціі УРН для проекту НПА - відповідь</s:documentation>
+		</s:annotation>
+	</s:element>
+	<s:element name="GetLegalActResponse" type="s0:GetLegalActResult">
+		<s:annotation>
+			<s:documentation>Інформація по конкретному проекту НПА - відповідь</s:documentation>
+		</s:annotation>
+	</s:element>
+	<s:element name="GetAllLegalActsResponse" type="s0:GetAllLegalActsResult">
+		<s:annotation>
+			<s:documentation>Перелік активних проектів НПА - відповідь</s:documentation>
+		</s:annotation>
+	</s:element>
+
+		</s:schema>
+	</types>
+	<message name="ICoverLegalActService_GetAllLegalActs_InputMessage">
+		<part name="parameters" element="s0:GetAllLegalActs"/>
+	</message>
+	<message name="ICoverLegalActService_GetAllLegalActs_OutputMessage">
+		<part name="parameters" element="s0:GetAllLegalActsResponse"/>
+	</message>
+	<message name="ICoverLegalActService_GetLegalAct_InputMessage">
+		<part name="parameters" element="s0:GetLegalAct"/>
+	</message>
+	<message name="ICoverLegalActService_GetLegalAct_OutputMessage">
+		<part name="parameters" element="s0:GetLegalActResponse"/>
+	</message>
+	<message name="ICoverLegalActService_GetNewLegalActURN_InputMessage">
+		<part name="parameters" element="s0:GetNewLegalActURN"/>
+	</message>
+	<message name="ICoverLegalActService_GetNewLegalActURN_OutputMessage">
+		<part name="parameters" element="s0:GetNewLegalActURNResponse"/>
+	</message>
+	<message name="ICoverLegalActService_CancelURNRegistration_InputMessage">
+		<part name="parameters" element="s0:CancelURNRegistration"/>
+	</message>
+	<message name="ICoverLegalActService_CancelURNRegistration_OutputMessage">
+		<part name="parameters" element="s0:CancelURNRegistrationResponse"/>
+	</message>
+	<portType name="ICoverGetLegalActService">
+		<operation name="GetAllLegalActs">
+			<input message="ICoverLegalActService_GetAllLegalActs_InputMessage"/>
+			<output message="ICoverLegalActService_GetAllLegalActs_OutputMessage"/>
+		</operation>
+		<operation name="GetLegalAct">
+			<input message="s0:ICoverLegalActService_GetLegalAct_InputMessage"/>
+			<output message="s0:ICoverLegalActService_GetLegalAct_OutputMessage"/>
+		</operation>
+		<operation name="GetNewLegalActURN">
+			<input message="s0:ICoverLegalActService_GetNewLegalActURN_InputMessage"/>
+			<output message="s0:ICoverLegalActService_GetNewLegalActURN_OutputMessage"/>
+		</operation>
+		<operation name="CancelURNRegistration">
+			<input message="s0:ICoverLegalActService_CancelURNRegistration_InputMessage"/>
+			<output message="s0:ICoverLegalActService_CancelURNRegistration_OutputMessage"/>
+		</operation>
+	</portType>
+	<binding name="BasicHttpBinding_ICoverLegalActService" type="s0:ICoverGetLegalActService">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="GetAllLegalActs">
+			<soap:operation soapAction="http://tempuri.org/ICoverLegalActService/GetAllLegalActs" style="document"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetLegalAct">
+			<soap:operation soapAction="http://tempuri.org/ICoverLegalActService/GetLegalAct" style="document"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetNewLegalActURN">
+			<soap:operation soapAction="http://tempuri.org/ICoverLegalActService/GetNewLegalActURN" style="document"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="CancelURNRegistration">
+			<soap:operation soapAction="http://tempuri.org/ICoverLegalActService/CancelURNRegistration" style="document"/>
+			<input>
+				<soap:body use="literal"/>
+			</input>
+			<output>
+				<soap:body use="literal"/>
+			</output>
+		</operation>
+	</binding>
+	<service name="LegalActService">
+		<port name="BasicHttpBinding_ICoverLegalActService" binding="s0:BasicHttpBinding_ICoverLegalActService">
+			<soap:address location="https://sev20.dir.gov.ua/csp/dirbus/bus.esb.LegalActService.cls"/>
+		</port>
+	</service>
+</definitions>

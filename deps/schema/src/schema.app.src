@@ -1,0 +1,10 @@
+{application, schema,
+ [
+  {description, "ERP Enterprise Resource Planning"},
+  {vsn, "3.11.4"},
+  {registered, []},
+  {applications, [kernel,stdlib,kvs]},
+  {mod, { erp, []}},
+  {env, []}
+ ]}.
+

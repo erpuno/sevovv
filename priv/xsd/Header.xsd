@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="Header">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="TypeHeader_Base">
+                    <xs:sequence>
+                        <xs:element name="Document" type="TypeDocument" minOccurs="0"/>
+                        <xs:element name="TaskList" type="TypeTaskList" minOccurs="0"/>
+                        <xs:element name="AddDocuments" type="TypeAddDocuments" minOccurs="0"/>
+                        <xs:element name="Expansion" type="TypeExpansion" minOccurs="0"/>
+                        <xs:element name="Acknowledgement" type="TypeAcknowledgement" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="TypeAddress">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="street" type="xs:string" use="optional"/>
+                <xs:attribute name="house" type="xs:string" use="optional"/>
+                <xs:attribute name="building" type="xs:string" use="optional"/>
+                <xs:attribute name="flat" type="xs:string" use="optional"/>
+                <xs:attribute name="settlement" type="xs:string" use="optional"/>
+                <xs:attribute name="district" type="xs:string" use="optional"/>
+                <xs:attribute name="region" type="xs:string" use="optional"/>
+                <xs:attribute name="country" type="xs:string" use="optional"/>
+                <xs:attribute name="postcode" type="xs:string" use="optional"/>
+                <xs:attribute name="postbox" type="xs:string" use="optional"/>
+                <xs:attribute name="nontypical" type="xs:string" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TypeEcontact">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="type" type="EcontactEnum" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:simpleType name="EcontactEnum">
+        <xs:annotation>
+            <xs:documentation></xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="р"/>
+            <xs:enumeration value="д"/>
+            <xs:enumeration value="м"/>
+            <xs:enumeration value="ф"/>
+            <xs:enumeration value="п"/>
+            <xs:enumeration value="і"/>
+            <xs:enumeration value="s"/>
+            <xs:enumeration value="c"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="TypeOfficial">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="department" type="xs:string" use="optional"/>
+                <xs:attribute name="post" type="xs:string" use="optional"/>
+                <xs:attribute name="separator" type="xs:string" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TypeRank">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="privilege" type="xs:string" use="optional"/>
+                <xs:attribute name="socialposition" type="xs:string" use="optional"/>
+                <xs:attribute name="sex" use="optional" default="0">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:integer">
+                            <xs:enumeration value="0"/>
+                            <xs:enumeration value="1"/>
+                            <xs:enumeration value="2"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TypeRegNumber">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="regdate" type="xs:date" use="required"/>
+                <xs:attribute name="regpoint" type="xs:string" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TypeTaskNumber">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="taskDate" type="xs:date" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TypeConfident">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="flag" use="required">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:integer">
+                            <xs:enumeration value="0"/>
+                            <xs:enumeration value="1"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TypeOrganization">
+        <xs:sequence>
+            <xs:element name="Address" type="TypeAddress" minOccurs="0"/>
+            <xs:element name="Econtact" type="TypeEcontact" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="fullname" type="xs:string" use="optional"/>
+        <xs:attribute name="shortname" type="xs:string" use="optional"/>
+        <xs:attribute name="ownership" type="xs:string" use="optional"/>
+        <xs:attribute name="ogrn" type="xs:integer" use="required"/>
+        <xs:attribute name="inn" type="xs:integer" use="optional"/>
+    </xs:complexType>
+    <xs:complexType name="TypeOrganization_OPerson">
+        <xs:complexContent>
+            <xs:extension base="TypeOrganization">
+                <xs:sequence>
+                    <xs:element name="OfficialPerson" type="TypeOfficialPerson" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TypeOrganization_OPerson_Sign">
+        <xs:complexContent>
+            <xs:extension base="TypeOrganization">
+                <xs:sequence>
+                    <xs:element name="OfficialPerson" type="TypeOfficialPerson_Sign" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TypeDocNumber">
+        <xs:sequence>
+            <xs:element name="Organization" type="TypeOrganization_OPerson_Sign" minOccurs="0"/>
+            <xs:element name="RegNumber" type="TypeRegNumber"/>
+        </xs:sequence>
+        <xs:attribute name="kind" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="TypeDocTransfer">
+        <xs:simpleContent>
+            <xs:extension base="xs:base64Binary">
+                <xs:attribute name="os" type="xs:string" use="optional"/>
+                <xs:attribute name="type" type="xs:string" use="required"/>
+                <xs:attribute name="type_ver" type="xs:string" use="optional"/>
+                <xs:attribute name="char_set" type="xs:string" use="optional"/>
+                <xs:attribute name="description" type="xs:string" use="required"/>
+                <xs:attribute name="idnumber" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TypeName">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="secname" type="xs:string" use="optional"/>
+                <xs:attribute name="firstname" type="xs:string" use="optional"/>
+                <xs:attribute name="fathersname" type="xs:string" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="TypePrivatePerson">
+        <xs:sequence>
+            <xs:element name="Name" type="TypeName"/>
+            <xs:element name="Rank" type="TypeRank" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Address" type="TypeAddress" minOccurs="0"/>
+            <xs:element name="Econtact" type="TypeEcontact" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="inn" type="xs:integer" use="optional"/>
+        <xs:attribute name="pas_ser" type="xs:string" use="optional"/>
+        <xs:attribute name="pas_num" type="xs:string" use="optional"/>
+        <xs:attribute name="pas_org" type="xs:string" use="optional"/>
+        <xs:attribute name="pas_date" type="xs:date" use="optional"/>
+    </xs:complexType>
+    <xs:complexType name="TypePrivatePerson_Sign">
+        <xs:complexContent>
+            <xs:extension base="TypePrivatePerson">
+                <xs:sequence>
+                    <xs:element name="SignDate" type="xs:date" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TypeOfficialPerson">
+        <xs:sequence>
+            <xs:element name="Name" type="TypeName"/>
+            <xs:element name="Official" type="TypeOfficial" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Rank" type="TypeRank" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Address" type="TypeAddress" minOccurs="0"/>
+            <xs:element name="Econtact" type="TypeEcontact" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TypeOfficialPerson_Sign">
+        <xs:complexContent>
+            <xs:extension base="TypeOfficialPerson">
+                <xs:sequence>
+                    <xs:element name="SignDate" type="xs:date" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="TypeReghistory">
+        <xs:sequence>
+            <xs:element name="Organization" type="TypeOrganization" minOccurs="0"/>
+            <xs:element name="RegNumber" type="TypeRegNumber"/>
+        </xs:sequence>
+        <xs:attribute name="idnumber" type="xs:string" use="optional"/>
+    </xs:complexType>
+    <xs:complexType name="TypeReferred">
+        <xs:choice>
+            <xs:element name="RegNumber" type="TypeRegNumber"/>
+            <xs:element name="TaskNumber" type="TypeTaskNumber"/>
+        </xs:choice>
+        <xs:attribute name="idnumber" type="xs:string" use="optional"/>
+        <xs:attribute name="retype" type="RetypeEnum" use="required"/>
+    </xs:complexType>
+    <xs:simpleType name="RetypeEnum">
+        <xs:annotation>
+            <xs:documentation>                <!--д - посилання на документ                    з - посилання на завдання --></xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="д"/>
+            <xs:enumeration value="з"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TypeDocType">
+        <xs:restriction base="xs:integer">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TypeCollection">
+        <xs:restriction base="xs:integer">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="TypeDocument_Link">
+        <xs:sequence>
+            <xs:element name="RegNumber" type="TypeRegNumber" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="DocumentAttributes"/>
+    </xs:complexType>
+    <xs:attributeGroup name="DocumentAttributes">
+        <xs:attribute name="idnumber" type="xs:string" use="required"/>
+        <xs:attribute name="type" type="TypeDocType" use="required"/>
+        <xs:attribute name="kind" type="xs:string" use="optional"/>
+        <xs:attribute name="idnumber_ext" type="xs:string" use="optional"/>
+        <xs:attribute name="pages" type="xs:integer" use="optional"/>
+        <xs:attribute name="title" type="xs:string" use="optional"/>
+        <xs:attribute name="annotation" type="xs:string" use="optional"/>
+        <xs:attribute name="collection" type="TypeCollection" use="optional"/>
+        <xs:attribute name="purpose_type" use="required">
+            <xs:annotation>
+                <xs:documentation>
+                <!--
+                0 - Інформування
+                1 - На погодження
+                2 - Для узагальнення
+                3 - На виконання
+                4 - Звітність
+                5 - До виконання на погодження
+                6 – На погодження за дорученням
+           --></xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:integer">
+                    <xs:enumeration value="0"/>
+                    <xs:enumeration value="1"/>
+                    <xs:enumeration value="2"/>
+                    <xs:enumeration value="3"/>
+                    <xs:enumeration value="4"/>
+                    <xs:enumeration value="5"/>
+                    <xs:enumeration value="6"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="urgent">
+            <xs:annotation>
+                <xs:documentation>                    <!--0 – ні               1 - так           --></xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:integer">
+                    <xs:enumeration value="0"/>
+                    <xs:enumeration value="1"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:attributeGroup>
+    <xs:complexType name="TypeDocument">
+        <xs:sequence>
+            <xs:element name="RegNumber" type="TypeRegNumber"/>
+            <xs:element name="Confident" type="TypeConfident"/>
+            <xs:element name="DocNumber" type="TypeDocNumber" minOccurs="0"/>
+            <xs:element name="DocTransfer" type="TypeDocTransfer" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Reghistory" type="TypeReghistory" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Author" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:choice minOccurs="0">
+                            <xs:element name="Organization" type="TypeOrganization_OPerson_Sign"/>
+                            <xs:element name="PrivatePerson" type="TypePrivatePerson_Sign"/>
+                        </xs:choice>
+                        <xs:element name="OutNumber" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="RegNumber" type="TypeRegNumber"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Validator" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:choice minOccurs="0">
+                            <xs:element name="Organization" type="TypeOrganization_OPerson_Sign"/>
+                            <xs:element name="PrivatePerson" type="TypePrivatePerson_Sign"/>
+                        </xs:choice>
+                        <xs:element name="DocNumber" type="TypeDocNumber" minOccurs="0"/>
+                    </xs:sequence>
+                    <xs:attribute name="attestation" type="xs:string" use="required"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Addressee" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:choice minOccurs="0">
+                            <xs:element name="Organization" type="TypeOrganization_OPerson"/>
+                            <xs:element name="PrivatePerson" type="TypePrivatePerson"/>
+                        </xs:choice>
+                        <xs:element name="Referred" type="TypeReferred" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                    <xs:attribute name="type" type="TypeAddresseeType" use="required"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Writer" minOccurs="0">
+                <xs:complexType>
+                    <xs:choice minOccurs="0">
+                        <xs:element name="Organization" type="TypeOrganization_OPerson"/>
+                        <xs:element name="PrivatePerson" type="TypePrivatePerson"/>
+                    </xs:choice>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Approval" type="TypeApproval" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="DocumentAttributes"/>
+    </xs:complexType>
+    <xs:complexType name="TypeTaskList">
+        <xs:sequence>
+            <xs:element name="Task" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="TaskNumber" type="TypeTaskNumber"/>
+                        <xs:element name="Confident" type="TypeConfident"/>
+                        <xs:element name="Referred" type="TypeReferred" maxOccurs="unbounded"/>
+                        <xs:element name="Author" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="Organization" type="TypeOrganization_OPerson_Sign"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="DocTransfer" type="TypeDocTransfer" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="Executor" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="Organization" type="TypeOrganization_OPerson"/>
+                                </xs:sequence>
+                                <xs:attribute name="responsible" use="optional">
+                                    <xs:simpleType>
+                                        <xs:annotation>
+                                            <xs:documentation>                                                <!--0 - співвиконавець,   1 - відповідальний виконавець   2 – до відома      Значення 1 може бути тільки у одного із списку виконавців                       --></xs:documentation>
+                                        </xs:annotation>
+                                        <xs:restriction base="xs:integer">
+                                            <xs:enumeration value="0"/>
+                                            <xs:enumeration value="1"/>
+                                            <xs:enumeration value="2"/>
+                                        </xs:restriction>
+                                    </xs:simpleType>
+                                </xs:attribute>
+                                <xs:attribute name="task_specified" type="xs:string" use="optional"/>
+                                <xs:attribute name="deadline" type="xs:date" use="required"/>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="idnumber" type="xs:string" use="required"/>
+                    <xs:attribute name="task_reg" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:integer">
+                                <xs:enumeration value="0"/>
+                                <xs:enumeration value="1"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                    <xs:attribute name="task_copy" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:integer">
+                                <xs:enumeration value="0"/>
+                                <xs:enumeration value="1"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                    <xs:attribute name="kind" type="xs:string" use="optional"/>
+                    <xs:attribute name="task_text" type="xs:string" use="required"/>
+                    <xs:attribute name="deadline" type="xs:date" use="optional"/>
+                    <xs:attribute name="referred-control" use="required">
+                        <xs:annotation>
+                            <xs:documentation>                                <!--Ознака контролю завдання:                     0 – завдання не на  контролі                     1 – завдання на контролі                  --></xs:documentation>
+                        </xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:integer">
+                                <xs:enumeration value="0"/>
+                                <xs:enumeration value="1"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TypeAddDocuments">
+        <xs:sequence>
+            <xs:element name="Folder" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="DocTransfer" type="TypeDocTransfer" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="Note" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="Document" type="TypeDocument_Link" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                    <xs:attribute name="add_type" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:integer">
+                                <xs:enumeration value="0"/>
+                                <xs:enumeration value="1"/>
+                                <xs:enumeration value="2"/>
+                                <xs:enumeration value="3"/>
+                                <xs:enumeration value="4"/>
+                                <xs:enumeration value="5"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TypeExpansion">
+        <xs:sequence>
+            <xs:element name="Econtact" type="TypeEcontact" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="StaticExpansion" type="TypeStaticExpansion" minOccurs="1"/>
+            <xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="organization" type="xs:string" use="required"/>
+        <xs:attribute name="exp_ver" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="TypeSignInfo">
+        <xs:sequence>
+            <xs:element name="CertificateData" type="xs:base64Binary" minOccurs="0"/>
+            <xs:element name="SigningTime" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="SignData" type="xs:base64Binary"/>
+        </xs:sequence>
+        <xs:attribute name="docTransfer_idnumber" type="xs:string" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="TypeAcknowledgement">
+        <xs:sequence>
+            <xs:element name="RegNumber" type="TypeRegNumber" minOccurs="0"/>
+            <xs:element name="AckResult" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:attribute name="errorcode" type="xs:integer" use="required"/>
+                    <xs:attribute name="errortext" type="xs:string" use="required"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="DocTransfer" type="TypeDocTransfer" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="msg_id" type="xs:string" use="required"/>
+        <xs:attribute name="ack_type" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:integer">
+                    <xs:enumeration value="1"/>
+                    <xs:enumeration value="2"/>
+                    <xs:enumeration value="3"/>
+                    <xs:enumeration value="4"/>
+                    <xs:enumeration value="5"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+    <xs:simpleType name="TypeMsgType">
+        <xs:restriction base="xs:integer">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+            <xs:enumeration value="2"/>
+            <xs:enumeration value="3"/>
+            <xs:enumeration value="4"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TypeAddresseeType">
+        <xs:restriction base="xs:integer">
+            <xs:enumeration value="0"/>
+            <xs:enumeration value="1"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="TypeHeader_Base">
+        <xs:attribute name="standart" type="xs:string" use="required" fixed="1207"/>
+        <xs:attribute name="version" type="xs:string" use="required" fixed="1.5"/>
+        <xs:attribute name="charset" type="xs:string" use="required"/>
+        <xs:attribute name="time" type="xs:dateTime" use="required"/>
+        <xs:attribute name="msg_type" type="TypeMsgType" use="required"/>
+        <xs:attribute name="msg_id" type="xs:string" use="required"/>
+        <xs:attribute name="msg_acknow" use="optional" default="0">
+            <xs:simpleType>
+                <xs:restriction base="xs:integer">
+                    <xs:enumeration value="0"/>
+                    <xs:enumeration value="1"/>
+                    <xs:enumeration value="2"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="from_org_id" type="xs:string" use="required"/>
+        <xs:attribute name="from_organization" type="xs:string" use="required"/>
+        <xs:attribute name="from_department" type="xs:string" use="optional"/>
+        <xs:attribute name="from_sys_id" type="xs:string" use="required"/>
+        <xs:attribute name="from_system" type="xs:string" use="required"/>
+        <xs:attribute name="from_system_details" type="xs:string" use="optional"/>
+        <xs:attribute name="to_org_id" type="xs:string" use="required"/>
+        <xs:attribute name="to_organization" type="xs:string" use="required"/>
+        <xs:attribute name="to_department" type="xs:string" use="optional"/>
+        <xs:attribute name="to_sys_id" type="xs:string" use="required"/>
+        <xs:attribute name="to_system" type="xs:string" use="required"/>
+        <xs:attribute name="to_system_details" type="xs:string" use="optional"/>
+    </xs:complexType>
+    <xs:complexType name="TypeStaticExpansion">
+        <xs:sequence>
+            <xs:element name="SignInfo" type="TypeSignInfo" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TypeApproval">
+        <xs:choice>
+            <xs:element name="ApprovalRequest" type="TypeApprovalRequest"/>
+            <xs:element name="ApprovalResponse" type="TypeApprovalResponse"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="TypeApprovalRequest">
+        <xs:sequence>
+            <xs:element name="InitiativeDocumentSender" type="TypeInitiativeDocumentSender" minOccurs="0"/>
+            <xs:element name="Approver" type="TypeApprover" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TypeInitiativeDocumentSender">
+        <xs:sequence>
+            <xs:choice minOccurs="0">
+                <xs:element name="Organization" type="TypeOrganization_OPerson"/>
+                <xs:element name="PrivatePerson" type="TypePrivatePerson"/>
+            </xs:choice>
+            <xs:element name="Referred" type="TypeReferred" minOccurs="2" maxOccurs="2"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TypeApprovalResponse">
+        <xs:attribute name="attestation" type="xs:string" use="required"/>
+        <xs:attribute name="comment" type="xs:string" use="optional"/>
+    </xs:complexType>
+    <xs:complexType name="TypeApprover">
+        <xs:sequence>
+            <xs:choice minOccurs="0">
+                <xs:element name="Organization" type="TypeOrganization_OPerson"/>
+                <xs:element name="PrivatePerson" type="TypePrivatePerson"/>
+            </xs:choice>
+            <xs:element name="ReferredApprover" type="TypeReferredApprover" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="idnumber" type="xs:string" use="required"/>
+        <xs:attribute name="deadline" type="xs:date" use="required"/>
+    </xs:complexType>
+    <xs:complexType name="TypeReferredApprover">
+        <xs:attribute name="idnumber" type="xs:string" use="required"/>
+    </xs:complexType>
+</xs:schema>

@@ -1,0 +1,8 @@
+{application,smtp,
+             [{description,"SMTP: Client and Server"},
+              {vsn,"1.1.1"},
+              {applications,[kernel,stdlib,crypto,asn1,public_key,ssl,ranch]},
+              {registered,[]},
+              {licenses,["BSD-2-Clause"]},
+              {links,[{"GitHub","https://github.com/erpuno/smtp"}]},
+              {exclude_files,["src/smtp_rfc822_parse.erl"]}]}.

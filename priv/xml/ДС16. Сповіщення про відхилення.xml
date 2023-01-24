@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Header standart="1207" version="1.5" charset="UTF-8" time="2015-09-12T10:33:40Z" msg_type="0" msg_id="f857f2ec-7e80-4ded-9fb1-4c6e8d80c4e2" msg_acknow="0" from_org_id="30116577" from_organization="ТОВ НВП &quot;Інформаційні технології&quot;" from_sys_id="052dfd86-34c4-4053-993e-21d9888465f6" from_system="IT-Enterprise" from_system_details="2015.10.00.06" to_org_id="30855996" to_organization="ДП &quot;Державний центр інформаційних ресурсів України&quot;" to_sys_id="99999999" to_system="CЭВ">
+  <Acknowledgement msg_id="486C9E34-297B-4480-B04F-0BDF57CF195B" ack_type="4">
+    <AckResult errorcode="0" errortext="Документ відхилено" />
+  </Acknowledgement>
+</Header>

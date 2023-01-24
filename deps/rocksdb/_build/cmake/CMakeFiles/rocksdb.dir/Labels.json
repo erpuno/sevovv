@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/CMakeFiles/rocksdb"
+		},
+		{
+			"file" : "/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/CMakeFiles/rocksdb.rule"
+		},
+		{
+			"file" : "/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/CMakeFiles/rocksdb-complete.rule"
+		},
+		{
+			"file" : "/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-stamp/rocksdb-build.rule"
+		},
+		{
+			"file" : "/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-stamp/rocksdb-configure.rule"
+		},
+		{
+			"file" : "/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-stamp/rocksdb-download.rule"
+		},
+		{
+			"file" : "/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-stamp/rocksdb-install.rule"
+		},
+		{
+			"file" : "/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-stamp/rocksdb-mkdir.rule"
+		},
+		{
+			"file" : "/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-stamp/rocksdb-patch.rule"
+		},
+		{
+			"file" : "/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-stamp/rocksdb-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"rocksdb"
+		],
+		"name" : "rocksdb"
+	}
+}

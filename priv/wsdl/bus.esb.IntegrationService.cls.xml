@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+  xmlns="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+  xmlns:s="http://www.w3.org/2001/XMLSchema"
+  xmlns:s0="http://tempuri.org"
+  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <types>
+        <s:schema elementFormDefault="qualified">
+            <s:element name="DownloadMessageChunk" type="s0:DownloadMessageChunk"/>
+            <s:complexType name="DownloadMessageChunk">
+                <s:sequence>
+                    <s:element minOccurs="0" name="identity" type="s0:Identity"/>
+                    <s:element minOccurs="0" name="sessionId" type="s:long"/>
+                    <s:element minOccurs="0" name="fromPosition" type="s:long"/>
+                    <s:element minOccurs="0" name="count" type="s:long"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="Identity">
+                <s:sequence>
+                    <s:element minOccurs="0" name="Password" type="s:string"/>
+                    <s:element minOccurs="0" name="SystemId" type="s:string"/>
+                </s:sequence>
+            </s:complexType>
+            <s:element name="DownloadMessageChunkResponse" type="s0:DownloadMessageChunkResponse"/>
+            <s:complexType name="DownloadMessageChunkResponse">
+                <s:sequence>
+                    <s:element minOccurs="0" name="DownloadMessageChunkResult" type="s0:DownloadChunkResponse"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="DownloadChunkResponse">
+                <s:sequence>
+                    <s:element minOccurs="0" name="MessageChunk" type="s:base64Binary"/>
+                    <s:element minOccurs="0" name="Session" type="s0:SessionInfo"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="SessionInfo">
+                <s:sequence>
+                    <s:element minOccurs="0" name="Error" type="s0:CommunicationError"/>
+                    <s:element minOccurs="0" name="MaxPartSize" type="s:int"/>
+                    <s:element minOccurs="0" name="MessageId" type="s:string"/>
+                    <s:element minOccurs="0" name="MessageSize" type="s:long"/>
+                    <s:element minOccurs="0" name="SessionId" type="s:long"/>
+                    <s:element minOccurs="0" name="Status" type="s0:SessionStatus"/>
+                    <s:element minOccurs="0" name="TransferredBytesCount" type="s:long"/>
+                    <s:element minOccurs="0" name="Type" type="s0:SessionType"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="CommunicationError">
+                <s:sequence>
+                    <s:element minOccurs="0" name="Code" type="s:int"/>
+                    <s:element minOccurs="0" name="Text" type="s:string"/>
+                </s:sequence>
+            </s:complexType>
+            <s:simpleType name="SessionStatus">
+                <s:restriction base="s:string">
+                    <s:enumeration value="Opened"/>
+                    <s:enumeration value="InProgress"/>
+                    <s:enumeration value="Processed"/>
+                    <s:enumeration value="Failed"/>
+                    <s:enumeration value="Delivered"/>
+                </s:restriction>
+            </s:simpleType>
+            <s:simpleType name="SessionType">
+                <s:restriction base="s:string">
+                    <s:enumeration value="Upload"/>
+                    <s:enumeration value="Download"/>
+                </s:restriction>
+            </s:simpleType>
+            <s:element name="EndProcessingDownloadedMessage" type="s0:EndProcessingDownloadedMessage"/>
+            <s:complexType name="EndProcessingDownloadedMessage">
+                <s:sequence>
+                    <s:element minOccurs="0" name="identity" type="s0:Identity"/>
+                    <s:element minOccurs="0" name="sessionInfo" type="s0:SessionInfo"/>
+                </s:sequence>
+            </s:complexType>
+            <s:element name="EndProcessingDownloadedMessageResponse" type="s0:EndProcessingDownloadedMessageResponse"/>
+            <s:complexType name="EndProcessingDownloadedMessageResponse">
+                <s:sequence>
+                    <s:element minOccurs="0" name="EndProcessingDownloadedMessageResult" type="s0:SessionInfo"/>
+                </s:sequence>
+            </s:complexType>
+            <s:element name="GetInputMessages" type="s0:GetInputMessages"/>
+            <s:complexType name="GetInputMessages">
+                <s:sequence>
+                    <s:element minOccurs="0" name="identity" type="s0:Identity"/>
+                    <s:element minOccurs="0" name="сount" type="s:int"/>
+                </s:sequence>
+            </s:complexType>
+            <s:element name="GetInputMessagesResponse" type="s0:GetInputMessagesResponse"/>
+            <s:complexType name="GetInputMessagesResponse">
+                <s:sequence>
+                    <s:element minOccurs="0" name="GetInputMessagesResult" type="s0:ArrayOfMessageInfo"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="ArrayOfMessageInfo">
+                <s:sequence>
+                    <s:element maxOccurs="unbounded" minOccurs="0" name="MessageInfo" nillable="true" type="s0:MessageInfo"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="ArrayOfMessageInfoMessageInfo">
+                <s:sequence>
+                    <s:element maxOccurs="unbounded" minOccurs="0" name="MessageInfo" nillable="true" type="s0:MessageInfo"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="MessageInfo">
+                <s:sequence>
+                    <s:element minOccurs="0" name="CreationDate" type="s:dateTime"/>
+                    <s:element minOccurs="0" name="Creator" type="s0:MessageCreator"/>
+                    <s:element minOccurs="0" name="Format" type="s0:DataTransferFormat"/>
+                    <s:element minOccurs="0" name="FromOrgId" type="s:string"/>
+                    <s:element minOccurs="0" name="FromSysId" type="s:string"/>
+                    <s:element minOccurs="0" name="MessageId" type="s:string"/>
+                    <s:element minOccurs="0" name="SessionId" type="s:long"/>
+                    <s:element minOccurs="0" name="Size" type="s:long"/>
+                    <s:element minOccurs="0" name="ToOrgId" type="s:string"/>
+                    <s:element minOccurs="0" name="ToSysId" type="s:string"/>
+                    <s:element minOccurs="0" name="Type" type="s0:MessageType"/>
+                </s:sequence>
+            </s:complexType>
+            <s:simpleType name="MessageCreator">
+                <s:restriction base="s:string">
+                    <s:enumeration value="Sed"/>
+                    <s:enumeration value="Sev"/>
+                </s:restriction>
+            </s:simpleType>
+            <s:simpleType name="DataTransferFormat">
+                <s:restriction base="s:string">
+                    <s:enumeration value="Plain"/>
+                    <s:enumeration value="SevenZipArchive"/>
+                </s:restriction>
+            </s:simpleType>
+            <s:simpleType name="MessageType">
+                <s:restriction base="s:string">
+                    <s:enumeration value="Notification"/>
+                    <s:enumeration value="Document"/>
+                    <s:enumeration value="DocumentAddition"/>
+                    <s:enumeration value="ReplayDocument"/>
+                    <s:enumeration value="ReplayDocumentAddition"/>
+                </s:restriction>
+            </s:simpleType>
+            <s:element name="GetMessageValidationInfo" type="s0:GetMessageValidationInfo"/>
+            <s:complexType name="GetMessageValidationInfo">
+                <s:sequence>
+                    <s:element minOccurs="0" name="identity" type="s0:Identity"/>
+                    <s:element minOccurs="0" name="sessionId" type="s:long"/>
+                </s:sequence>
+            </s:complexType>
+            <s:element name="GetMessageValidationInfoResponse" type="s0:GetMessageValidationInfoResponse"/>
+            <s:complexType name="GetMessageValidationInfoResponse">
+                <s:sequence>
+                    <s:element minOccurs="0" name="GetMessageValidationInfoResult" type="s0:MessageValidationInfo"/>
+                </s:sequence>
+            </s:complexType>
+            <s:complexType name="MessageValidationInfo">
+                <s:sequence>
+                    <s:element minOccurs="0" name="Hash" type="s:string"/>
+                    <s:element minOccurs="0" name="Session" type="s0:SessionInfo"/>
+                    <s:element minOccurs="0" name="Signature" type="s:base64Binary"/>
+                </s:sequence>
+            </s:complexType>
+            <s:element name="GetSessionInfo" type="s0:GetSessionInfo"/>
+            <s:complexType name="GetSessionInfo">
+                <s:sequence>
+                    <s:element minOccurs="0" name="identity" type="s0:Identity"/>
+                    <s:element minOccurs="0" name="sessionId" type="s:long"/>
+                </s:sequence>
+            </s:complexType>
+            <s:element name="GetSessionInfoResponse" type="s0:GetSessionInfoResponse"/>
+            <s:complexType name="GetSessionInfoResponse">
+                <s:sequence>
+                    <s:element minOccurs="0" name="GetSessionInfoResult" type="s0:SessionInfo"/>
+                </s:sequence>
+            </s:complexType>
+            <s:element name="OpenDownloadingSession" type="s0:OpenDownloadingSession"/>
+            <s:complexType name="OpenDownloadingSession">
+                <s:sequence>
+                    <s:element minOccurs="0" name="identity" type="s0:Identity"/>
+                    <s:element minOccurs="0" name="messageId" type="s:string"/>
+                </s:sequence>
+            </s:complexType>
+            <s:element name="OpenDownloadingSessionResponse" type="s0:OpenDownloadingSessionResponse"/>
+            <s:complexType name="OpenDownloadingSessionResponse">
+                <s:sequence>
+                    <s:element minOccurs="0" name="OpenDownloadingSessionResult" type="s0:SessionInfo"/>
+                </s:sequence>
+            </s:complexType>
+            <s:element name="OpenUploadingSession" type="s0:OpenUploadingSession"/>
+            <s:complexType name="OpenUploadingSession">
+                <s:sequence>
+                    <s:element minOccurs="0" name="identity" type="s0:Identity"/>
+                    <s:element minOccurs="0" name="messageInfo" type="s0:MessageInfo"/>
+                    <s:element minOccurs="0" name="hash" type="s:string"/>
+                    <s:element minOccurs="0" name="signature" type="s:base64Binary"/>
+                </s:sequence>
+            </s:complexType>
+            <s:element name="OpenUploadingSessionResponse" type="s0:OpenUploadingSessionResponse"/>
+            <s:complexType name="OpenUploadingSessionResponse">
+                <s:sequence>
+                    <s:element minOccurs="0" name="OpenUploadingSessionResult" type="s0:SessionInfo"/>
+                </s:sequence>
+            </s:complexType>
+            <s:element name="UploadMessageChunk" type="s0:UploadMessageChunk"/>
+            <s:complexType name="UploadMessageChunk">
+                <s:sequence>
+                    <s:element minOccurs="0" name="identity" type="s0:Identity"/>
+                    <s:element minOccurs="0" name="sessionId" type="s:long"/>
+                    <s:element minOccurs="0" name="messageChunk" type="s:base64Binary"/>
+                </s:sequence>
+            </s:complexType>
+            <s:element name="UploadMessageChunkResponse" type="s0:UploadMessageChunkResponse"/>
+            <s:complexType name="UploadMessageChunkResponse">
+                <s:sequence>
+                    <s:element minOccurs="0" name="UploadMessageChunkResult" type="s0:SessionInfo"/>
+                </s:sequence>
+            </s:complexType>
+        </s:schema>
+    </types>
+    <message name="DownloadMessageChunkSoapIn">
+        <part name="DownloadMessageChunk" element="s01:DownloadMessageChunk" xmlns:s01="http://tempuri.org/"/>
+    </message>
+    <message name="DownloadMessageChunkSoapOut">
+        <part name="DownloadMessageChunkResponse" element="s01:DownloadMessageChunkResponse" xmlns:s01="http://tempuri.org/"/>
+    </message>
+    <message name="EndProcessingDownloadedMessageSoapIn">
+        <part name="EndProcessingDownloadedMessage" element="s01:EndProcessingDownloadedMessage" xmlns:s01="http://tempuri.org/"/>
+    </message>
+    <message name="EndProcessingDownloadedMessageSoapOut">
+        <part name="EndProcessingDownloadedMessageResponse" element="s01:EndProcessingDownloadedMessageResponse" xmlns:s01="http://tempuri.org/"/>
+    </message>
+    <message name="GetInputMessagesSoapIn">
+        <part name="GetInputMessages" element="s01:GetInputMessages" xmlns:s01="http://tempuri.org/"/>
+    </message>
+    <message name="GetInputMessagesSoapOut">
+        <part name="GetInputMessagesResponse" element="s01:GetInputMessagesResponse" xmlns:s01="http://tempuri.org/"/>
+    </message>
+    <message name="GetMessageValidationInfoSoapIn">
+        <part name="GetMessageValidationInfo" element="s01:GetMessageValidationInfo" xmlns:s01="http://tempuri.org/"/>
+    </message>
+    <message name="GetMessageValidationInfoSoapOut">
+        <part name="GetMessageValidationInfoResponse" element="s01:GetMessageValidationInfoResponse" xmlns:s01="http://tempuri.org/"/>
+    </message>
+    <message name="GetSessionInfoSoapIn">
+        <part name="GetSessionInfo" element="s01:GetSessionInfo" xmlns:s01="http://tempuri.org/"/>
+    </message>
+    <message name="GetSessionInfoSoapOut">
+        <part name="GetSessionInfoResponse" element="s01:GetSessionInfoResponse" xmlns:s01="http://tempuri.org/"/>
+    </message>
+    <message name="OpenDownloadingSessionSoapIn">
+        <part name="OpenDownloadingSession" element="s01:OpenDownloadingSession" xmlns:s01="http://tempuri.org/"/>
+    </message>
+    <message name="OpenDownloadingSessionSoapOut">
+        <part name="OpenDownloadingSessionResponse" element="s01:OpenDownloadingSessionResponse" xmlns:s01="http://tempuri.org/"/>
+    </message>
+    <message name="OpenUploadingSessionSoapIn">
+        <part name="OpenUploadingSession" element="s01:OpenUploadingSession" xmlns:s01="http://tempuri.org/"/>
+    </message>
+    <message name="OpenUploadingSessionSoapOut">
+        <part name="OpenUploadingSessionResponse" element="s01:OpenUploadingSessionResponse" xmlns:s01="http://tempuri.org/"/>
+    </message>
+    <message name="UploadMessageChunkSoapIn">
+        <part name="UploadMessageChunk" element="s01:UploadMessageChunk" xmlns:s01="http://tempuri.org/"/>
+    </message>
+    <message name="UploadMessageChunkSoapOut">
+        <part name="UploadMessageChunkResponse" element="s01:UploadMessageChunkResponse" xmlns:s01="http://tempuri.org/"/>
+    </message>
+    <portType name="IntegrationServiceSoap">
+        <operation name="DownloadMessageChunk">
+            <input message="s0:DownloadMessageChunkSoapIn"/>
+            <output message="s0:DownloadMessageChunkSoapOut"/>
+        </operation>
+        <operation name="EndProcessingDownloadedMessage">
+            <input message="s0:EndProcessingDownloadedMessageSoapIn"/>
+            <output message="s0:EndProcessingDownloadedMessageSoapOut"/>
+        </operation>
+        <operation name="GetInputMessages">
+            <input message="s0:GetInputMessagesSoapIn"/>
+            <output message="s0:GetInputMessagesSoapOut"/>
+        </operation>
+        <operation name="GetMessageValidationInfo">
+            <input message="s0:GetMessageValidationInfoSoapIn"/>
+            <output message="s0:GetMessageValidationInfoSoapOut"/>
+        </operation>
+        <operation name="GetSessionInfo">
+            <input message="s0:GetSessionInfoSoapIn"/>
+            <output message="s0:GetSessionInfoSoapOut"/>
+        </operation>
+        <operation name="OpenDownloadingSession">
+            <input message="s0:OpenDownloadingSessionSoapIn"/>
+            <output message="s0:OpenDownloadingSessionSoapOut"/>
+        </operation>
+        <operation name="OpenUploadingSession">
+            <input message="s0:OpenUploadingSessionSoapIn"/>
+            <output message="s0:OpenUploadingSessionSoapOut"/>
+        </operation>
+        <operation name="UploadMessageChunk">
+            <input message="s0:UploadMessageChunkSoapIn"/>
+            <output message="s0:UploadMessageChunkSoapOut"/>
+        </operation>
+    </portType>
+    <binding name="IntegrationServiceSoap" type="s0:IntegrationServiceSoap">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <operation name="DownloadMessageChunk">
+            <soap:operation soapAction="http://tempuri.org/ICoverIntegrationService/DownloadMessageChunk" style="document"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="EndProcessingDownloadedMessage">
+            <soap:operation soapAction="http://tempuri.org/ICoverIntegrationService/EndProcessingDownloadedMessage" style="document"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="GetInputMessages">
+            <soap:operation soapAction="http://tempuri.org/ICoverIntegrationService/GetInputMessages" style="document"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="GetMessageValidationInfo">
+            <soap:operation soapAction="http://tempuri.org/ICoverIntegrationService/GetMessageValidationInfo" style="document"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="GetSessionInfo">
+            <soap:operation soapAction="http://tempuri.org/ICoverIntegrationService/GetSessionInfo" style="document"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="OpenDownloadingSession">
+            <soap:operation soapAction="http://tempuri.org/ICoverIntegrationService/OpenDownloadingSession" style="document"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="OpenUploadingSession">
+            <soap:operation soapAction="http://tempuri.org/ICoverIntegrationService/OpenUploadingSession" style="document"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="UploadMessageChunk">
+            <soap:operation soapAction="http://tempuri.org/ICoverIntegrationService/UploadMessageChunk" style="document"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="IntegrationService">
+        <port name="IntegrationServiceSoap" binding="s0:IntegrationServiceSoap">
+            <soap:address location="https://sev21.dir.gov.ua/csp/dirbus/bus.esb.IntegrationService.cls"/>
+        </port>
+    </service>
+</definitions>

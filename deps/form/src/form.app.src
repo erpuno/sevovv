@@ -1,0 +1,7 @@
+{application, form,
+   [{description, "FORM Business X-Forms"},
+    {vsn, "7.8.0"},
+    {registered, []},
+    {applications, [kernel,stdlib,nitro]},
+    {mod, { form, []}},
+    {env, []} ]}.

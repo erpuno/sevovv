@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Header standart="1207" version="1.5" charset="UTF-8" time="2015-09-09T13:05:30Z" msg_type="3" msg_id="738a8974-780e-4168-9f8b-1ab95c7507bf" msg_acknow="2" from_org_id="37472062" from_organization="Міністерство інфраструктури України" from_sys_id="052dfd86-34c4-4053-993e-21d9888465f6" from_system="IT-Enterprise" from_system_details="2015.10.00.06" to_org_id="7879990908" to_organization="ВРУ" to_sys_id="99999999" to_system="CЭВ">
+  <Document idnumber="184" type="0" kind="Ініціативний лист" title="Ініціативний лист" annotation="ДС9. Звітність На погодження" collection="0" purpose_type="4" urgent="0">
+    <RegNumber regdate="2015-09-09">7/16/14-15</RegNumber>
+    <Confident flag="0" />
+    <Author>
+      <Organization fullname="Міністерство інфраструктури України" shortname="Міністерство інфраструктури України" ogrn="37472062">
+        <Address>м. Київ, проспект Перемоги, 14</Address>
+        <OfficialPerson>
+          <Name secname="Пивоварський" firstname="Андрій" fathersname="Миколайович" />
+          <Official post="Міністр" />
+        </OfficialPerson>
+      </Organization>
+      <OutNumber>
+        <RegNumber regdate="2015-09-09">7/16/14-15</RegNumber>
+      </OutNumber>
+    </Author>
+    <Addressee type="0">
+      <Organization fullname="ВРУ" shortname="ВРУ" ogrn="7879990908">
+        <Address></Address>
+        <OfficialPerson>
+          <Name secname="Панкевич" firstname="Іван" fathersname="Петрович" />
+          <Official post="Міністр" />
+        </OfficialPerson>
+      </Organization>
+      <Referred idnumber="8895449" retype="д">
+        <RegNumber regdate="2015-09-02">67879899</RegNumber>
+      </Referred>
+    </Addressee>
+    <Writer>
+      <Organization fullname="Міністерство інфраструктури України" shortname="Міністерство інфраструктури України" ogrn="37472062">
+        <Address>м. Київ, проспект Перемоги, 14</Address>
+        <OfficialPerson>
+          <Name secname="Мельник" firstname="Юлія" fathersname="Миколаївна" />
+          <Official post="" />
+        </OfficialPerson>
+      </Organization>
+    </Writer>
+  </Document>
+</Header>

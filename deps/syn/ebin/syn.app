@@ -1,0 +1,13 @@
+{application,syn,
+             [{description,"A global Process Registry and Process Group manager."},
+              {vsn,"2.1.4"},
+              {registered,[syn_backbone,syn_groups,syn_registry,syn_sup]},
+              {applications,[kernel,stdlib]},
+              {mod,{syn_app,[]}},
+              {env,[]},
+              {licenses,["MIT"]},
+              {links,[{"Github","https://github.com/ostinelli/syn"},
+                      {"ostinelli|net",
+                       "http://www.ostinelli.net/a-journey-to-syn-v2/"}]},
+              {modules,[syn,syn_app,syn_backbone,syn_event_handler,syn_groups,
+                        syn_registry,syn_sup]}]}.

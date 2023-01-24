@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Header standart="1207" version="1.5" charset="UTF-8" time="2018-11-01T17:22:53Z" msg_type="0" msg_id="25D568BC-9925-4DE5-91D9-C9540D50F518" from_org_id="30855996" from_organization="Державний центр інформаційних ресурсів" from_sys_id="e19d738b-11c2-4e1a-98e3-80e042223ad9" from_system="Держінформресурс" to_org_id="000000039" to_organization="Кабінет Міністрів України (службовий запис для погодження НПА)" to_sys_id="5796f7fe-c0b0-4ed6-866e-d36ad454ec04" to_system="КМУ (НПА)">
+	<Expansion organization="BMS Consulting" exp_ver="1.0">
+		<LegalAct>
+			<GUID>D348E82B-7D99-4E4B-89D1-C28F4A8C1544</GUID>
+			<Stage>1</Stage>
+			<IsRevoke>1</IsRevoke>
+			<RevokePurpose>some purpose</RevokePurpose>
+		</LegalAct>
+	</Expansion>
+	<Acknowledgement msg_id="25D568BC-9925-4DE5-91D9-C9540D50F518" ack_type="1">
+		<AckResult errorcode="0" errortext="OK"/>
+	</Acknowledgement>
+</Header>

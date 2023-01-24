@@ -1,0 +1,315 @@
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by  () -->
+<xs:schema xmlns:tns="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:q1="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:q2="http://schemas.datacontract.org/2004/07/Cover.Contracts" targetNamespace="http://tempuri.org/" elementFormDefault="qualified">
+	<xs:import namespace="http://schemas.datacontract.org/2004/07/Cover.Contracts" schemaLocation="Common.xsd"/>
+	<xs:complexType name="LegalActData">
+		<xs:annotation>
+			<xs:documentation>Тип "Інформація по конкретному проекту НПА"</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="initOrg" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Організація розробник НПА</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="actName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Назва проекту НПА</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="actGUID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ідентифікаційний номер проекту НПА</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="initDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата ініціації проекту НПА</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="currentStage" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Поточний етап погодження проекту НПА</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="outDocRegNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Вихідний реєстраційний номер останньої РКК на погодження поточного етапу погодження НПА</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lastTS" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата та час внесення останньої зміни в проекті НПА</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="stage1PassageInfo" type="tns:ArrayOfPassageInfo">
+				<xs:annotation>
+					<xs:documentation>Інформація щодо проходження 1-го етапу - погодження відповідних ОВВ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="stage2PassageInfo" type="tns:PassageInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Інформація щодо проходження 2-го етапу - державної експертизи</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="stage3PassageInfo" type="tns:PassageInfo" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Інформація щодо проходження 3-го етапу - розгляду у СКМУ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AllLegalActsData">
+		<xs:annotation>
+			<xs:documentation>Тип "Перелік активних проектів НПА"</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="initOrg" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Організація розробник НПА</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="actName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Назва проекту НПА</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="actGUID" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Ідентифікаційний номер проекту НПА</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="initDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата ініціації проекту НПА</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="currentStage" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Поточний етап погодження проекту НПА</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="outDocRegNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Вихідний реєстраційний номер останньої РКК на погодження поточного етапу погодження НПА</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lastTS" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата та час внесення останньої зміни в проекті НПА</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PassageInfo">
+		<xs:annotation>
+			<xs:documentation>Інформація щодо проходження проекту НПА у відповідному ОВВ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="org" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>ОВВ, до якого НПА направлено на погодження</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="incomeDate" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Дата надсилання на погодження</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="outDocRegNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Вихідний реєстраційний номер останньої РКК на погодження</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="inDocRegNum" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Вхідний реєстраційний номер РКК на погодження в ОВВ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="answerResult" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Результат виконання(погодження)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="answerResultDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата виконання(погодження)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="answerDocRegNum" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Вихідний реєстраційний номер звіту на погодження</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="answerDocSigner" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Підписант звіту на погодження</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ArrayOfPassageInfo">
+		<xs:annotation>
+			<xs:documentation>Масив - Інформація щодо проходження проекту НПА у відповідному ОВВ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="passageInfo" type="tns:PassageInfo" minOccurs="2" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ArrayOfLegalActsData">
+		<xs:annotation>
+			<xs:documentation>Масив - Інформація щодо проходження проекту НПА у відповідному ОВВ</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="legalActData" type="tns:AllLegalActsData" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetAllLegalActs">
+		<xs:annotation>
+			<xs:documentation>Перелік активних проектів НПА - запит</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="identity" type="q1:Identity" nillable="true"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetLegalAct">
+		<xs:annotation>
+			<xs:documentation>Інформація по конкретному проекту НПА - запит</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="identity" type="q1:Identity" nillable="true"/>
+				<xs:element name="actGUID" type="xs:string" nillable="true"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GetNewLegalActURN">
+		<xs:annotation>
+			<xs:documentation>Формування нового УРН для проекту НПА - запит</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="identity" type="q1:Identity" nillable="true"/>
+				<xs:element name="actType">
+					<xs:annotation>
+						<xs:documentation>тип проекту акта ("З" - законопроект, "У" - Указ, "П" - постанова, "Р" - розпорядження)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="CancelURNRegistration">
+		<xs:annotation>
+			<xs:documentation>Скасування реєстраціі УРН для проекту НПА - запит</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="identity" type="q1:Identity" nillable="true"/>
+				<xs:element name="urn">
+					<xs:annotation>
+						<xs:documentation>УРН, який необхідно скасувати </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="GetLegalActResult">
+		<xs:annotation>
+			<xs:documentation>Тип "Інформація по конкретному проекту НПА - відповідь"</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="actGUID" type="xs:string" nillable="true">
+				<xs:annotation>
+					<xs:documentation>GUID НПА</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="error" type="q1:CommunicationError" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Помилка</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="passFormFile" type="xs:base64Binary" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Файл аркушу проходження НПА</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="legalActData" type="tns:LegalActData" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дані НПА</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetNewLegalActURNResult">
+		<xs:annotation>
+			<xs:documentation>Тип "Формування нового УРН для проекту НПА - відповідь"</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="error" type="q1:CommunicationError" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Помилка</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="urn" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Новий сформований УРН для проекту НПА</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CancelURNRegistrationResult">
+		<xs:annotation>
+			<xs:documentation>Тип "Скасування реєстраціі УРН для проекту НПА - відповідь"</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="error" type="q1:CommunicationError" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Помилка</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="isURNCancelled" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Позначка того, що скасування виконано успішно</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetAllLegalActsResult">
+		<xs:annotation>
+			<xs:documentation>Тип "Перелік активних проектів НПА - відповідь"</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="error" type="q1:CommunicationError" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Помилка</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="allLegalActsData" type="tns:ArrayOfLegalActsData" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дані переліку НПА</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GetNewLegalActURNResponse" type="tns:GetNewLegalActURNResult">
+		<xs:annotation>
+			<xs:documentation>Формування нового УРН для проекту НПА - відповідь</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="CancelURNRegistrationResponse" type="tns:CancelURNRegistrationResult">
+		<xs:annotation>
+			<xs:documentation>Скасування реєстраціі УРН для проекту НПА - відповідь</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetLegalActResponse" type="tns:GetLegalActResult">
+		<xs:annotation>
+			<xs:documentation>Інформація по конкретному проекту НПА - відповідь</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="GetAllLegalActsResponse" type="tns:GetAllLegalActsResult">
+		<xs:annotation>
+			<xs:documentation>Перелік активних проектів НПА - відповідь</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

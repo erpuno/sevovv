@@ -1,0 +1,160 @@
+<!-- edited with XMLSpy v2013 (http://www.altova.com) by  () -->
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Cover.Contracts" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://schemas.microsoft.com/2003/10/Serialization/" targetNamespace="http://schemas.datacontract.org/2004/07/Cover.Contracts" elementFormDefault="qualified">
+	<xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" schemaLocation="XSDTypes.xsd"/>
+	<xs:complexType name="Identity">
+		<xs:sequence>
+			<xs:element name="Password" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="SystemId" type="xs:string" nillable="true" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Identity" type="tns:Identity" nillable="true"/>
+	<xs:complexType name="MessageInfo">
+		<xs:sequence>
+			<xs:element name="CreationDate" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="Creator" type="tns:MessageCreator" minOccurs="0"/>
+			<xs:element name="Format" type="tns:DataTransferFormat" minOccurs="0"/>
+			<xs:element name="FromOrgId" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="FromSysId" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="MessageId" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="SessionId" type="xs:long" minOccurs="0"/>
+			<xs:element name="Size" type="xs:long" minOccurs="0"/>
+			<xs:element name="ToOrgId" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="ToSysId" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="Type" type="tns:MessageType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="MessageInfo" type="tns:MessageInfo" nillable="true"/>
+	<xs:simpleType name="MessageCreator">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Sed"/>
+			<xs:enumeration value="Sev"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="MessageCreator" type="tns:MessageCreator" nillable="true"/>
+	<xs:simpleType name="DataTransferFormat">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Plain"/>
+			<xs:enumeration value="SevenZipArchive"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="DataTransferFormat" type="tns:DataTransferFormat" nillable="true"/>
+	<xs:simpleType name="MessageType">
+		<xs:annotation>
+			<xs:appinfo>
+				<ActualType Name="unsignedByte" Namespace="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Notification"/>
+			<xs:enumeration value="Document"/>
+			<xs:enumeration value="DocumentAddition"/>
+			<xs:enumeration value="ReplayDocument"/>
+			<xs:enumeration value="ReplayDocumentAddition"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="MessageType" type="tns:MessageType" nillable="true"/>
+	<xs:complexType name="SessionInfo">
+		<xs:sequence>
+			<xs:element name="Error" type="tns:CommunicationError" nillable="true" minOccurs="0"/>
+			<xs:element name="MaxPartSize" type="xs:int" minOccurs="0"/>
+			<xs:element name="MessageId" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="MessageSize" type="xs:long" minOccurs="0"/>
+			<xs:element name="SessionId" type="xs:long" minOccurs="0"/>
+			<xs:element name="Status" type="tns:SessionStatus" minOccurs="0"/>
+			<xs:element name="TransferredBytesCount" type="xs:long" minOccurs="0"/>
+			<xs:element name="Type" type="tns:SessionType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="SessionInfo" type="tns:SessionInfo" nillable="true"/>
+	<xs:complexType name="CommunicationError">
+		<xs:sequence>
+			<xs:element name="Code" type="xs:int" minOccurs="0"/>
+			<xs:element name="Text" type="xs:string" nillable="true" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CommunicationError" type="tns:CommunicationError" nillable="true"/>
+	<xs:simpleType name="SessionStatus">
+		<xs:annotation>
+			<xs:appinfo>
+				<ActualType Name="unsignedByte" Namespace="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Opened">
+				<xs:annotation>
+					<xs:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="InProgress">
+				<xs:annotation>
+					<xs:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Processed">
+				<xs:annotation>
+					<xs:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Failed">
+				<xs:annotation>
+					<xs:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Delivered">
+				<xs:annotation>
+					<xs:appinfo>
+						<EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="SessionStatus" type="tns:SessionStatus" nillable="true"/>
+	<xs:simpleType name="SessionType">
+		<xs:annotation>
+			<xs:appinfo>
+				<ActualType Name="unsignedByte" Namespace="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Upload"/>
+			<xs:enumeration value="Download"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="SessionType" type="tns:SessionType" nillable="true"/>
+	<xs:complexType name="DownloadChunkResponse">
+		<xs:sequence>
+			<xs:element name="MessageChunk" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+			<xs:element name="Session" type="tns:SessionInfo" nillable="true" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DownloadChunkResponse" type="tns:DownloadChunkResponse" nillable="true"/>
+	<xs:complexType name="MessageValidationInfo">
+		<xs:sequence>
+			<xs:element name="Hash" type="xs:string" nillable="true" minOccurs="0"/>
+			<xs:element name="Session" type="tns:SessionInfo" nillable="true" minOccurs="0"/>
+			<xs:element name="Signature" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="MessageValidationInfo" type="tns:MessageValidationInfo" nillable="true"/>
+	<xs:complexType name="ArrayOfSessionInfo">
+		<xs:sequence>
+			<xs:element name="SessionInfo" type="tns:SessionInfo" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfSessionInfo" type="tns:ArrayOfSessionInfo" nillable="true"/>
+	<xs:complexType name="ArrayOfMessageInfo">
+		<xs:sequence>
+			<xs:element name="MessageInfo" type="tns:MessageInfo" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ArrayOfMessageInfo" type="tns:ArrayOfMessageInfo" nillable="true"/>
+</xs:schema>

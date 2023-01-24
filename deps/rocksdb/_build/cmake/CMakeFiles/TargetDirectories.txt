@@ -1,0 +1,4 @@
+/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/CMakeFiles/erocksdb.dir
+/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/CMakeFiles/rocksdb.dir
+/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/CMakeFiles/edit_cache.dir
+/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/CMakeFiles/rebuild_cache.dir

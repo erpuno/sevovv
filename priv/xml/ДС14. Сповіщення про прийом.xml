@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Header standart="1207" version="1.5" charset="UTF-8" time="2015-09-11T06:56:45Z" msg_type="0" msg_id="d59cc010-2888-468a-aedf-84a4079e7767" msg_acknow="0" from_org_id="30116577" from_organization="ТОВ НВП &quot;Інформаційні технології&quot;" from_sys_id="052dfd86-34c4-4053-993e-21d9888465f6" from_system="IT-Enterprise" from_system_details="2015.10.00.06" to_org_id="30855996" to_organization="ДП &quot;Державний центр інформаційних ресурсів України&quot;" to_sys_id="99999999" to_system="CЭВ">
+  <Acknowledgement msg_id="63FC75F4-0759-4CFD-9E78-0903537D8597" ack_type="2">
+    <AckResult errorcode="0" errortext="Повідомлення було прийнято без помилок" />
+  </Acknowledgement>
+</Header>

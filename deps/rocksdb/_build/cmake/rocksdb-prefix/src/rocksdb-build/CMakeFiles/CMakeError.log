@@ -1,0 +1,32 @@
+Determining if the getauxval exist failed with the following output:
+Change Dir: /home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_7465f/fast && gmake[3]: Entering directory '/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-build/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_7465f.dir/build.make CMakeFiles/cmTC_7465f.dir/build
+gmake[4]: Entering directory '/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_7465f.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++   -W -Wextra -Wall -Wsign-compare -Wshadow -Wno-unused-parameter -Wno-unused-variable -Woverloaded-virtual -Wnon-virtual-dtor -Wno-missing-field-initializers -Wno-strict-aliasing -fno-omit-frame-pointer -momit-leaf-frame-pointer -fno-builtin-memcmp  -fPIE -o CMakeFiles/cmTC_7465f.dir/CheckSymbolExists.cxx.o -c /home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:2:10: fatal error: auvx.h: No such file or directory
+    2 | #include <auvx.h>
+      |          ^~~~~~~~
+compilation terminated.
+gmake[4]: *** [CMakeFiles/cmTC_7465f.dir/build.make:78: CMakeFiles/cmTC_7465f.dir/CheckSymbolExists.cxx.o] Error 1
+gmake[4]: Leaving directory '/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-build/CMakeFiles/CMakeTmp'
+gmake[3]: *** [Makefile:127: cmTC_7465f/fast] Error 2
+gmake[3]: Leaving directory '/home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-build/CMakeFiles/CMakeTmp'
+
+
+File /home/maksym/depot/erpuno/sevovv/deps/rocksdb/_build/cmake/rocksdb-prefix/src/rocksdb-build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+/* */
+#include <auvx.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef getauxval
+  return ((int*)(&getauxval))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}

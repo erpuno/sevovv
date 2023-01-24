@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="" />
+<meta name="author" content="Maxim Sokhatsky" />
+<title>STREAM</title>
+<link rel="stylesheet" href="https://n2o.dev/blank.css" />
+<link rel="stylesheet" href="https://n2o.dev/zima.css" />
+</head><body><nav>
+    <a href="https://n2o.dev">DEV</a>
+    <a href="https://kvs.n2o.dev">KVS</a>
+    <a href="#" style="background:#ededed;">STREAM</a>
+  <div class="dropdown">
+    <a onclick="drop()" class="dropbtn">EN</a>
+    <div id="dropdown" class="dropdown-content">
+      <a href="https://n2o.dev/ua/deps/kvs/man/kvs_stream.htm">UA</a>
+      <a href="#">EN</a>
+    </div>
+  </div>
+</nav><header>
+    <a href="../index.html"><img src="https://openmoji.org/data/color/svg/1F4BF.svg"/></a>
+    <h1>STREAM</h1>
+</header>
+<main>
+  <article>
+    <section>
+	<h3>INTRO</h3>
+	<p>The STREAM module provides chain persistence, accumulation and traversal.</p>
+        <blockquote>
+          <ul><li><b><a href="#writer">writer/1</a></b> — creates writer cursor for chain.</li>
+              <li><b><a href="#reader">reader/1</a></b> — creates reader cursor for chain.</li>
+              <li><b><a href="#save">save/1</a></b> — stores cursor to db.</li>
+              <li><b><a href="#load_reader">load_reader/1</a></b> — loads reader cursor.</li>
+              <li><b><a href="#top">top/1</a></b> — returns top of the reader.</li>
+              <li><b><a href="#bot">bot/1</a></b> — returns bottom of the reader.</li>
+              <li><b><a href="#next">next/1</a></b> — moves reader next.</li>
+              <li><b><a href="#prev">prev/1</a></b> — moves reader prev.</li>
+              <li><b><a href="#take">take/1</a></b> — takes N elements from reader.</li>
+              <li><b><a href="#drop">drop/1</a></b> — skips N elements from reader.</li>
+              <li><b><a href="#add">add/1</a></b> — adds element to writer.</li>
+              <li><b><a href="#append">append/2</a></b> — appends element to feed.</li>
+              <li><b><a href="#append">remove/2</a></b> — removes element from feed.</li>
+              <li><b><a href="#cut">cut/2</a></b> — cleans-up the feed up to the key.</li>
+          </ul></blockquote>
+
+	<p>You can grab <a style="margin-bottom:30px;" href="https://raw.githubusercontent.com/synrc/kvs/master/src/layers/kvs_stream.erl">kvs_stream</a>
+	   and use it in your applications without importing <b>synrc/kvs</b> dependency,
+	   as this module is self-containing.
+	   The possible applications are: public and private feeds, FIFO queues,
+	   unread messages, chat applications, blockchain etc.<br /><br /></p>
+    </section>
+    <section>
+	<h3>WRITER</h3>
+
+	<p>Writer cursor represents unique append list chain with some cached values.
+	   E.g., elements <b>count</b>, <b>first</b> element of the chain, <b>cache</b> field for value of
+	   a previous written message and <b>args</b> field for passing arguments in fixpoint style.</p>
+
+	<figure><code> -record(writer,  { id    = [] :: term(),
+                    count =  0 :: integer(),
+                    cache = [] :: [] | tuple(),
+                    args  = [] :: term(),
+                    first = [] :: [] | tuple() } ).</code></figure>
+
+	<p>For adding data to storage you need to create writer cursor,
+	   set the <b>args</b> field with the record to be added:</p>
+
+	<figure><code> > require KVS
+ KVS
+ > KVS.writer
+ {:writer, [], 0, [], [], []}</code></figure>
+
+	<h4 id="writer">writer(list()) -> #writer{}.</h4>
+	<p>Creates writer cursor. After this you normally call <b>save</b> function for cursor persistence.
+	   As a parameter provide cursor name as a list.</p>
+
+	<figure><code> > w = :kvs.writer '/cursors/cur1'
+ {:writer, '/cursors/cur1', 0, [], [], []}</code></figure>
+
+	<h4 id="save">save(#writer{}) -> #writer{}.</h4>
+	<p>Flushes writer cursor to database.</p>
+
+	<figure><code> > :kvs.save w
+ {:writer, '/cursors/cur1', 0, [], [], []}
+ > :kvs.get :writer, '/cursors/cur1'
+ {:ok, {:writer, '/cursors/cur1', 0, [], [], []}}</code></figure>
+
+	<h4 id="add">add(#writer{}) -> #writer{}.</h4>
+	<p>Adds element to persistent chain declared by writer cursor.
+	   Adding elements to chain affects <b>count</b> field.</p>
+
+	<figure><code> > :lists.map fn _ ->
+   {:ok,w} = :kvs.get(:writer,'/cursors/cur1')
+   :kvs.save(:kvs.add(KVS.writer(w, args: {:"$msg", [], [], [], [], []})))
+ end, :lists.seq(1, 5)
+ [
+  {:writer, '/cursors/cur1', 1, {:"$msg", '1313544188019000'}, [], []},
+  {:writer, '/cursors/cur1', 2, {:"$msg", '1313544189127000'}, [], []},
+  {:writer, '/cursors/cur1', 3, {:"$msg", '1313544189869000'}, [], []},
+  {:writer, '/cursors/cur1', 4, {:"$msg", '1313544190519000'}, [], []},
+  {:writer, '/cursors/cur1', 5, {:"$msg", '1313544191134000'}, [], []}
+ ]
+ > :kvs.get :writer, '/cursors/cur1'
+ {:ok,
+  {:writer, '/cursors/cur1', 5, {:"$msg", '1314009332950000'}, [], []}}</code></figure>
+
+    </section>
+    <section>
+
+	<h3>READER</h3>
+	<p>Reader cursor represents a user reading pointer to the writer feed.
+	   Field <b>#reader.feed</b> is linked to <b>#writer.id</b>.
+	   The <b>pos</b> field represents current position in feed.
+	   Field <b>dir</b> is used for changing <b>take</b> and <b>drop</b> directions.</p>
+	<figure><figcaption>Reader Cursor</figcaption>
+	<code>  -record(reader, { id    = [] :: integer(),
+                    pos   =  0 :: [] | integer(),
+                    cache = [] :: [] | integer(),
+                    args  = [] :: term(),
+                    feed  = [] :: term(),
+                    dir   =  0 :: 0 | 1 } ).</code></figure>
+
+	<h4 id="reader">reader(term()) -> #reader{}.</h4>
+	<p>Creates reader cursor for a given writer id.</p>
+
+	<h4 id="load_reader">load_reader(term()) -> #reader{}.</h4>
+	<p>Loads reader cursor from database.</p>
+
+	<h4 id="save">save(#reader{}) -> #reader{}.</h4>
+	<p>Flushes reader cursor to database.</p>
+
+	<h4 id="bot">bot(#reader{}) -> #reader{dir = 0}.</h4>
+	<p>Changes the direction of the cursor to take foraward (normal).</p>
+
+	<h4 id="top">top(#reader{}) -> #reader{dir = 1}.</h4>
+	<p>Changes the direction of the cursor to take backwards.</p>
+    </section>
+    <section>
+	<h3>ITER</h3>
+	<figure><figcaption>KVS Stream Iterator</figcaption>
+	<code>  -record(iter,   { id    = [] :: [] | integer(),
+                    next  = [] :: [] | integer(),
+                    prev  = [] :: [] | integer() } ).</code></figure>
+
+	<h4 id="next">next(#reader{}) -> #reader{}.</h4>
+	<p>Moves cursor to next. Consume data down from top.
+	   Return error if list is empty, otherwise next element or last.</p>
+
+	<h4 id="prev">prev(#reader{}) -> #reader{}.</h4>
+	<p>Moves cursor to prev. Consume data up from bottom.
+	   Return error if list is empty, otherwise next element or last.</p>
+
+	<h4 id="drop">drop(#reader{}) -> #reader{}.</h4>
+	<p>Drops N elements starting from reader.</p>
+
+	<h4 id="take">take(#reader{}) -> #reader{}.</h4>
+	<p>Trying to consume N records from stream using its current value and direction.
+	   Returns consumed data. Usually you seek to some position and then consume some data.</p>
+
+	<h4 id="append">append(tuple(), list()) -> term().</h4>
+	<p>Adds record to feed.</p>
+
+	<h4 id="remove">remove(tuple(), list()) -> term().</h4>
+	<p>Removes record from feed.</p>
+
+	<h4 id="cut">cut(list(), term()) -> #ok{} | #error{}.</h4>
+	<p>Cuts the feed up to a given key.</p>
+
+    </section>
+    <section>
+	<p>This module may refer to:
+	<a href="kvs.htm"><b>kvs</b></a>,
+	<a href="kvs_st.htm"><b>kvs_st</b></a>.
+	</p>
+    </section>
+  </article>
+</main>
+<footer>2005—2019 © Synrc Research Center</footer>
+<script>function drop(){document.getElementById("dropdown").classList.toggle("show");}</script>
+</body>
+</html>

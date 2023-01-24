@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:import namespace="http://schemas.datacontract.org/2004/07/Cover.Contracts" />
+    <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    <xs:element name="OpenUploadingSession">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="identity" nillable="true" type="q1:Identity" />
+                <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="messageInfo" nillable="true" type="q2:MessageInfo" />
+                <xs:element minOccurs="0" name="hash" nillable="true" type="xs:string" />
+                <xs:element minOccurs="0" name="signature" nillable="true" type="xs:base64Binary" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OpenUploadingSessionResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="OpenUploadingSessionResult" nillable="true" type="q3:SessionInfo" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UploadMessageChunk">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="identity" nillable="true" type="q4:Identity" />
+                <xs:element minOccurs="0" name="sessionId" type="xs:long" />
+                <xs:element minOccurs="0" name="messageChunk" nillable="true" type="xs:base64Binary" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UploadMessageChunkResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="UploadMessageChunkResult" nillable="true" type="q5:SessionInfo" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OpenDownloadingSession">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="identity" nillable="true" type="q6:Identity" />
+                <xs:element minOccurs="0" name="messageId" nillable="true" type="xs:string" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OpenDownloadingSessionResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="OpenDownloadingSessionResult" nillable="true" type="q7:SessionInfo" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DownloadMessageChunk">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="identity" nillable="true" type="q8:Identity" />
+                <xs:element minOccurs="0" name="sessionId" type="xs:long" />
+                <xs:element minOccurs="0" name="fromPosition" type="xs:long" />
+                <xs:element minOccurs="0" name="count" type="xs:long" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DownloadMessageChunkResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="DownloadMessageChunkResult" nillable="true" type="q9:DownloadChunkResponse" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetMessageValidationInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="identity" nillable="true" type="q10:Identity" />
+                <xs:element minOccurs="0" name="sessionId" type="xs:long" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetMessageValidationInfoResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="GetMessageValidationInfoResult" nillable="true" type="q11:MessageValidationInfo" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EndProcessingDownloadedMessage">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="identity" nillable="true" type="q12:Identity" />
+                <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="sessionInfo" nillable="true" type="q13:SessionInfo" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EndProcessingDownloadedMessageResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="EndProcessingDownloadedMessageResult" nillable="true" type="q14:SessionInfo" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetSessionsInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="identity" nillable="true" type="q15:Identity" />
+                <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="sessionsIds" nillable="true" type="q16:ArrayOflong" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetSessionsInfoResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="GetSessionsInfoResult" nillable="true" type="q17:ArrayOfSessionInfo" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetSessionInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="identity" nillable="true" type="q18:Identity" />
+                <xs:element minOccurs="0" name="sessionId" type="xs:long" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetSessionInfoResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="GetSessionInfoResult" nillable="true" type="q19:SessionInfo" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetInputMessages">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="identity" nillable="true" type="q20:Identity" />
+                <xs:element minOccurs="0" name="сount" type="xs:int" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetInputMessagesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="GetInputMessagesResult" nillable="true" type="q21:ArrayOfMessageInfo" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetHistory">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="identity" nillable="true" type="q22:Identity" />
+                <xs:element minOccurs="0" name="fromDateTime" type="xs:dateTime" />
+                <xs:element minOccurs="0" name="toDateTime" type="xs:dateTime" />
+                <xs:element minOccurs="0" name="count" type="xs:int" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetHistoryResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/Cover.Contracts" minOccurs="0" name="GetHistoryResult" nillable="true" type="q23:ArrayOfMessageInfo" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetVersion">
+        <xs:complexType>
+            <xs:sequence />
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GetVersionResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="GetVersionResult" nillable="true" type="xs:string" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema> 
