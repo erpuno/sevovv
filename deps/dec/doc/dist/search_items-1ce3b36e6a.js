@@ -1,1 +1,0 @@
-searchNodes=[{"ref":"DEC.html","title":"DEC","type":"module","doc":""}]

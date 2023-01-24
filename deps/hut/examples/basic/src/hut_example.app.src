@@ -1,7 +1,0 @@
-{application, hut_example, [
-	{description, "example of using various hut configurations"},
-	{vsn, "0.1.0"},
-	{modules, []},
-	{registered, []},
-	{applications, [kernel,stdlib,hut]}
-]}.

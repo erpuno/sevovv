@@ -32,7 +32,7 @@ defmodule SEVOVV.Mixfile do
       {:schema, "~> 4.1.0"},
       {:soa, "~> 0.1.7"},
       {:smtp, "~> 1.1.2"},
-      {:nitro, "7.12.1", override: true},
+      {:nitro, "7.8.0"},
       {:ecsv, "~> 1.4.2"},
       {:bpe, "7.10.4"},
       {:sax, "~> 1.0.0"},
